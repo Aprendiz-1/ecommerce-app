@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
-  align-items: center;
   background-color: #f0f0f0;
 `;
 
@@ -12,16 +11,24 @@ export const HeaderContent = styled.View`
   align-items: center;
   justify-content: flex-start;
   padding: 15px;
+  margin-bottom: 8px;
 `;
 
 export const BackButton = styled.TouchableOpacity`
-  width: 45px;
-  height: 45px;
+  width: 54px;
+  height: 54px;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
-  border-radius: 5px;
+  background-color: #df7620;
+  border-radius: 30px;
   elevation: 2;
+`;
+
+export const Title = styled.Text`
+  font-size: 28px;
+  font-weight: bold;
+  color: #222;
+  margin: 0 0 27px 22px;
 `;
 
 export const EmptyCart = styled.View`
@@ -38,27 +45,17 @@ export const EmptyText = styled.Text`
 
 export const ButtonsContent = styled.View`
   width: 100%;
-  margin-top: 5px;
+  padding-bottom: 10px;
+  margin-top: 15px;
 `;
 
 export const CheckoutButton = styled.TouchableOpacity`
   width: 100%;
-  height: 48px;
+  height: 52px;
   align-items: center;
   justify-content: center;
-  background-color: #4e599c;
-  border-radius: 25px;
-  elevation: 5;
-`;
-
-export const CleanButton = styled.TouchableOpacity`
-  width: 100%;
-  height: 48px;
-  align-items: center;
-  justify-content: center;
-  background-color: rgb(219, 73, 73);
-  border-radius: 25px;
-  margin-top: 5px;
+  background-color: #717e25;
+  border-radius: 30px;
   elevation: 5;
 `;
 
@@ -66,4 +63,20 @@ export const ButtonText = styled.Text`
   font-size: 20px;
   font-weight: bold;
   color: #fff;
+`;
+
+export const CleanButton = styled.TouchableOpacity`
+  width: 100%;
+  height: 52px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #df7620;
+  border-radius: 30px;
+  margin-bottom: 8px;
+`;
+
+export const CleanButtonText = styled.Text`
+  font-size: 18px;
+  font-weight: 500;
+  color: #df7620;
 `;

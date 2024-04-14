@@ -1,6 +1,6 @@
-import {AmountCircle, AmountText, HeaderContainer, NavButton} from './styles';
+import { AmountCircle, AmountText, HeaderContainer, HeaderInput, NavButton } from './styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 type CartItemsProps = {
   id: number;
@@ -16,13 +16,14 @@ interface HeaderProps {
   items: CartItemsProps[];
 }
 
-export default function Header({items}: HeaderProps) {
+export default function Header({ items }: HeaderProps) {
   const navigation = useNavigation();
 
   return (
     <HeaderContainer>
+      <HeaderInput placeholder="Buscar produtos" placeholderTextColor="#444" />
       <NavButton onPress={() => navigation.navigate('Cart')}>
-        <Icon name="cart" size={30} color="#222" />
+        <Icon name="cart" size={26} color="#222" />
 
         {items.length !== 0 && (
           <AmountCircle>
@@ -33,3 +34,4 @@ export default function Header({items}: HeaderProps) {
     </HeaderContainer>
   );
 }
+

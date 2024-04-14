@@ -1,13 +1,6 @@
-import {Image} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {
-  CartButton,
-  Container,
-  ImageContent,
-  InfoContent,
-  Name,
-  Price,
-} from './styles';
+import { Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { CartButton, Container, ImageContent, InfoContent, Name, Price } from './styles';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 type ProductProps = {
@@ -46,7 +39,7 @@ export default function ProductCard({
   const navigation = useNavigation();
 
   function adicionar() {
-    const findItem = cartList.find(item => item.id === data.id);
+    const findItem = cartList.find((item) => item.id === data.id);
 
     if (findItem) {
       removeProduct();
@@ -64,20 +57,14 @@ export default function ProductCard({
           price: data.price,
           image: data.image,
         })
-      }>
-      <CartButton btColor={!teste ? '#ddd' : '#4E599C'} onPress={adicionar}>
-        <Icon
-          name="shopping-basket"
-          size={18}
-          color={!teste ? '#222' : '#fff'}
-        />
+      }
+    >
+      <CartButton btColor={!teste ? '#ddd' : '#717E25'} onPress={adicionar}>
+        <Icon name="shopping-basket" size={18} color={!teste ? '#222' : '#fff'} />
       </CartButton>
 
       <ImageContent>
-        <Image
-          source={{uri: `${data.image}`}}
-          style={{width: 100, height: 100}}
-        />
+        <Image source={data.image} style={{ width: 100, height: 100 }} />
       </ImageContent>
 
       <InfoContent>

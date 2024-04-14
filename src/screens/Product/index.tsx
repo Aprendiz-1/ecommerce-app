@@ -1,24 +1,26 @@
 import { RouteProp, useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
-import { Alert } from 'react-native';
+import { Alert, ScrollView, View } from 'react-native';
 import { api } from '../../services/api';
 import { useStripe } from '@stripe/stripe-react-native';
 import {
+  AddToCartButton,
   BackButton,
   ButtonText,
+  CartButtonText,
   CheckoutButton,
   Container,
   DescriptionContent,
   DescriptionText,
   DescriptionTitle,
   HeaderContent,
+  ProductContent,
   ProductImage,
   SubTitle,
-  SubTitleContent,
   Title,
-  TitleContent,
 } from './styles';
 import Icon from 'react-native-vector-icons/AntDesign';
+import Feather from 'react-native-vector-icons/Feather';
 
 type ProductProps = {
   Product: {
@@ -84,27 +86,32 @@ export default function Product({ route }: ScreenProps) {
     <Container>
       <HeaderContent>
         <BackButton onPress={() => navigation.goBack()}>
-          <Icon name="arrowleft" size={28} color="#222" />
+          <Icon name="arrowleft" size={28} color="#fff" />
         </BackButton>
       </HeaderContent>
 
-      <ProductImage source={{ uri: `${image}` }} alt="Produto" />
-
-      <TitleContent>
-        <Title>{name}</Title>
-        <SubTitleContent>
-          <SubTitle>R$ {price.toFixed(2)}</SubTitle>
-        </SubTitleContent>
-      </TitleContent>
+      <ProductContent>
+        <ProductImage source={image} alt="Produto" />
+        <Feather name="arrow-right" size={38} color="#fff" />
+      </ProductContent>
 
       <DescriptionContent>
-        <DescriptionTitle>Descrição:</DescriptionTitle>
-        <DescriptionText>{description}</DescriptionText>
-      </DescriptionContent>
+        <Title>{name}</Title>
+        <SubTitle>R$ {price.toFixed(2)}</SubTitle>
 
-      <CheckoutButton onPress={openPaymentSheet}>
-        <ButtonText>Comprar agora</ButtonText>
-      </CheckoutButton>
+        <View style={{ width: '100%', height: 1, backgroundColor: '#555', marginVertical: 15 }} />
+
+        <DescriptionTitle>Descrição</DescriptionTitle>
+        <DescriptionText>{description}</DescriptionText>
+
+        <AddToCartButton onPress={null}>
+          <CartButtonText>Adicionar ao carrinho</CartButtonText>
+        </AddToCartButton>
+
+        <CheckoutButton onPress={openPaymentSheet}>
+          <ButtonText>Comprar agora</ButtonText>
+        </CheckoutButton>
+      </DescriptionContent>
     </Container>
   );
 }

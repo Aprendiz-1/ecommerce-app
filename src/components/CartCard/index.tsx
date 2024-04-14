@@ -1,13 +1,12 @@
-import {useState} from 'react';
-import {Image} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { useState } from 'react';
+import { Image, TouchableOpacity, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import {
   AmountButton,
-  AmountContent,
   AmountText,
   ButtonsContent,
-  BuyButton,
-  BuyText,
+  BuyProductText,
+  CartProductContainer,
   Container,
   LeftContent,
   Name,
@@ -34,18 +33,13 @@ interface CardProps {
   deleteItem: () => void;
 }
 
-export default function CartCard({
-  data,
-  addAmount,
-  removeAmount,
-  deleteItem,
-}: CardProps) {
+export default function CartCard({ data, addAmount, removeAmount, deleteItem }: CardProps) {
   const [amount, setAmount] = useState(data.amount);
   const navigation = useNavigation();
 
   function addItem() {
     addAmount();
-    setAmount(item => item + 1);
+    setAmount((item) => item + 1);
   }
 
   function removeItem() {
@@ -56,53 +50,52 @@ export default function CartCard({
       return;
     }
 
-    setAmount(item => item - 1);
+    setAmount((item) => item - 1);
   }
 
   return (
-    <Container
-      onPress={() =>
-        navigation.navigate('Product', {
-          name: data.name,
-          description: data.description,
-          price: data.price,
-          image: data.image,
-        })
-      }>
-      <LeftContent>
-        <Image
-          source={{uri: `${data.image}`}}
-          alt="Produto"
-          style={{width: 110, height: 110}}
-        />
-      </LeftContent>
+    <CartProductContainer>
+      <Container
+        onPress={() =>
+          navigation.navigate('Product', {
+            name: data.name,
+            description: data.description,
+            price: data.price,
+            image: data.image,
+          })
+        }
+      >
+        <LeftContent>
+          <Image source={data.image} alt="Produto" style={{ width: 110, height: 110 }} />
+        </LeftContent>
 
-      <RightContent>
-        <Name>{data?.name}</Name>
-        <Price>R$ {data?.total.toFixed(2)}</Price>
+        <RightContent>
+          <View>
+            <Name>{data?.name}</Name>
+            <Price>R$ {data?.total.toFixed(2)}</Price>
+          </View>
 
-        <AmountContent>
-          <AmountButton onPress={removeItem}>
-            <AmountText>-</AmountText>
-          </AmountButton>
+          <ButtonsContent>
+            <AmountButton onPress={removeItem}>
+              <AmountText>-</AmountText>
+            </AmountButton>
 
-          <AmountText>{amount}</AmountText>
+            <AmountText>{amount}</AmountText>
 
-          <AmountButton onPress={addItem}>
-            <AmountText>+</AmountText>
-          </AmountButton>
-        </AmountContent>
+            <AmountButton onPress={addItem}>
+              <AmountText>+</AmountText>
+            </AmountButton>
 
-        <ButtonsContent>
-          {/* <BuyButton onPress={null}>
-            <BuyText>Buy</BuyText>
-          </BuyButton> */}
+            <RemoveButton onPress={() => deleteItem()}>
+              <Icon name="trash" size={30} color="#fff" />
+            </RemoveButton>
+          </ButtonsContent>
+        </RightContent>
+      </Container>
 
-          <RemoveButton onPress={() => deleteItem()}>
-            <Icon name="trash" size={30} color="#fff" />
-          </RemoveButton>
-        </ButtonsContent>
-      </RightContent>
-    </Container>
+      <TouchableOpacity style={{ width: '100%', alignItems: 'center' }}>
+        <BuyProductText>Comprar</BuyProductText>
+      </TouchableOpacity>
+    </CartProductContainer>
   );
 }

@@ -6,10 +6,12 @@ import {
   ButtonsContent,
   CheckoutButton,
   CleanButton,
+  CleanButtonText,
   Container,
   EmptyCart,
   EmptyText,
   HeaderContent,
+  Title,
 } from './styles';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
@@ -82,13 +84,15 @@ export default function Cart() {
       <Container>
         <HeaderContent>
           <BackButton onPress={() => navigation.goBack()}>
-            <Icon name="arrowleft" size={28} color="#222" />
+            <Icon name="arrowleft" size={28} color="#fff" />
           </BackButton>
         </HeaderContent>
 
+        <Title>Seu carrinho</Title>
+
         <FlatList
           data={cart}
-          style={{ width: '100%', paddingHorizontal: 15 }}
+          style={{ width: '100%', paddingHorizontal: 20 }}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item) => String(item.id)}
           ListEmptyComponent={() => (
@@ -106,16 +110,16 @@ export default function Cart() {
           )}
           ListFooterComponent={() => (
             <ButtonsContent>
+              {cart.length > 1 && (
+                <CleanButton onPress={() => cleanCart()}>
+                  <CleanButtonText>Esvaziar carrinho</CleanButtonText>
+                </CleanButton>
+              )}
+
               {cart.length !== 0 && (
                 <CheckoutButton onPress={openPaymentSheet}>
                   <ButtonText>Comprar: R$ {total.toFixed(2)}</ButtonText>
                 </CheckoutButton>
-              )}
-
-              {cart.length > 1 && (
-                <CleanButton onPress={() => cleanCart()}>
-                  <ButtonText>Esvaziar carrinho</ButtonText>
-                </CleanButton>
               )}
             </ButtonsContent>
           )}
